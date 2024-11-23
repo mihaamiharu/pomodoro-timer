@@ -24,7 +24,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 500px;
 }
 
 .tabs {
@@ -283,4 +283,201 @@ input[type="number"] {
 input[type="number"]:focus {
     border-color: #007bff;
     outline: none;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-content {
+    flex: 1; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    padding-right: 10px; 
+}
+
+/* Task Actions (buttons) */
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-task-btn,
+.delete-task-btn {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-task-btn {
+    background-color: #dc3545;
+}
+
+.edit-task-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-task-btn:hover {
+    background-color: #c82333; 
+}
+
+.edit-task-btn:active,
+.delete-task-btn:active {
+    transform: scale(0.95); /* Add a slight click effect */
+}
+
+/* Task List Container */
+.task-list {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 500px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-list h2 {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Task Input Container */
+.task-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between rows */
+    margin-bottom: 20px;
+    align-items: center; /* Center content horizontally */
+}
+
+/* Task Input Row */
+.task-input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Space between the input field and dropdown */
+    width: 100%; /* Full width of the container */
+}
+
+.task-input-row input[type="text"] {
+    flex: 2; /* Task input takes more space */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.task-input-row input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.task-input-row select {
+    flex: 1; /* Dropdown takes less space */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Add Button */
+#add-task-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Center the button */
+}
+
+#add-task-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#add-task-btn:active {
+    background-color: #003f7f;
+    transform: translateY(0);
+}
+
+/* Task List Items */
+#task-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#task-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Completed Task Style */
+#task-list li.completed {
+    text-decoration: line-through;
+    color: #888;
+    background-color: #f1f1f1;
+}
+
+
+/* Priority Tags */
+.task-priority-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 3px;
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+
+.task-priority-tag.low {
+    background-color: #28a745; /* Green for Low priority */
+}
+
+.task-priority-tag.medium {
+    background-color: #ffc107; /* Yellow for Medium priority */
+}
+
+.task-priority-tag.high {
+    background-color: #dc3545; /* Red for High priority */
 }
