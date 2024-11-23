@@ -13,6 +13,7 @@ import {
 } from './timer.js';
 import { renderTasks, initializeTaskListeners } from './tasks.js';
 import { updateTimerDisplay } from './dom.js';
+import { attachValidationListeners } from './validation.js';
 
 const timerDisplay = document.getElementById('timer-display');
 const startBtn = document.getElementById('start-btn');
@@ -115,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncInputsWithDurations();
     initializeTaskListeners();
     renderTasks();
+    attachValidationListeners([workInput, shortBreakInput, longBreakInput]);
     const progressRing = document.querySelector('.progress-ring');
     progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
     setCircleProgress(0);
