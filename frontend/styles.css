@@ -88,3 +88,64 @@ input {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.task-list {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.task-input input {
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.task-input button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #666;
+    color: white;
+}
+
+.task-input button:hover {
+    background-color: #555;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+#task-list li.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.task-list button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: red;
+    font-size: 14px;
+}
