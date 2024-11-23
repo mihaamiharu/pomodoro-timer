@@ -11,6 +11,7 @@ import {
     durations,
     timeLeft,
 } from './timer.js';
+import { renderTasks, initializeTaskListeners } from './tasks.js';
 import { updateTimerDisplay } from './dom.js';
 
 const timerDisplay = document.getElementById('timer-display');
@@ -50,7 +51,6 @@ function handleCustomDurationChange() {
     };
     applyCustomDurations(newDurations, renderTimer);
     renderTimer();
-    
 }
 
 workTab.addEventListener('click', handleTabSwitch);
@@ -80,3 +80,5 @@ document.addEventListener('DOMContentLoaded', () => {
 restoreDurationsFromStorage(renderTimer);
 restoreSessionData(renderTimer);
 syncInputsWithDurations();
+initializeTaskListeners();
+renderTasks();
