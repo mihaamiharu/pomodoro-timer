@@ -65,6 +65,17 @@ resetBtn.addEventListener('click', () => {
 workInput.addEventListener('change', handleCustomDurationChange);
 shortBreakInput.addEventListener('change', handleCustomDurationChange);
 longBreakInput.addEventListener('change', handleCustomDurationChange);
+document.addEventListener('DOMContentLoaded', () => {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+            } else {
+                console.log('Notification permission denied.');
+            }
+        });
+    }
+});
 
 restoreDurationsFromStorage(renderTimer);
 restoreSessionData(renderTimer);

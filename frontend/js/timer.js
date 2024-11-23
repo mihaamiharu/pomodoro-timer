@@ -21,11 +21,12 @@ export function startTimer(updateDisplay, switchSession) {
     isRunning = true;
     timerInterval = setInterval(() => {
         if (timeLeft > 0) {
-            timeLeft--; 
-            updateDisplay(); 
+            timeLeft--;
+            updateDisplay();
         } else {
             clearInterval(timerInterval);
             isRunning = false;
+            notifySessionEnd();
             switchSession();
         }
     }, 1000);
@@ -90,4 +91,17 @@ export function restoreSessionData(updateDisplay) {
     activeSession = sessionData.activeSession;
     timeLeft = sessionData.timeLeft;
     updateDisplay();
+}
+
+export function notifySessionEnd() {
+    const notificationSound = document.getElementById('notification-sound');
+    notificationSound.play();
+
+    if (Notification.permission === 'granted') {
+        new Notification('Pomodoro Timer', {
+            body: `${activeSession === 'work' ? 'Work' : activeSession === 'short-break' ? 'Short Break' : 'Long Break'} session completed!`,
+        });
+    } else {
+        console.log('Browser notifications are not enabled.');
+    }
 }
