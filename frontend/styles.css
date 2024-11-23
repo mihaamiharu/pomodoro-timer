@@ -14,6 +14,28 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #ddd;
+}
+
+.tabs button.active {
+    background: #666;
+    color: white;
 }
 
 #timer-display {
@@ -43,4 +65,26 @@ button:hover {
 
 button:active {
     background: #ccc;
+}
+
+.settings {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.settings div {
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+input {
+    width: 50px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
