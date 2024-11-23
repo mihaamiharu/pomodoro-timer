@@ -15,7 +15,19 @@
             <button id="short-break-tab">Short Break</button>
             <button id="long-break-tab">Long Break</button>
         </div>
-        <div id="timer-display">25:00</div>
+        <div class="progress-container">
+            <svg class="progress-ring" width="150" height="150">
+                <circle
+                    class="progress-ring-circle"
+                    stroke="#007bff"
+                    stroke-width="10"
+                    fill="transparent"
+                    r="65"
+                    cx="75"
+                    cy="75" />
+            </svg>
+            <div id="timer-display">25:00</div>
+        </div>
         <div class="controls">
             <button id="start-btn">Start</button>
             <button id="pause-btn">Pause</button>
