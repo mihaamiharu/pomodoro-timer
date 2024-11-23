@@ -1,8 +1,15 @@
+import { getOrCreateMachineUserId } from './users.js';
+
 let taskInput = document.getElementById('task-input');
 let addTaskBtn = document.getElementById('add-task-btn');
 let taskList = document.getElementById('task-list');
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const userKey = `tasks_${getOrCreateMachineUserId()}`;
+let tasks = JSON.parse(localStorage.getItem(userKey)) || [];
+
+function saveTasks() {
+    localStorage.setItem(userKey, JSON.stringify(tasks));
+}
 
 export function renderTasks() {
     taskList.innerHTML = '';
@@ -22,7 +29,7 @@ export function addTask() {
     const taskName = taskInput.value.trim();
     if (taskName) {
         tasks.push({ name: taskName, completed: false });
-        taskInput.value = ''; 
+        taskInput.value = '';
         saveTasks();
         renderTasks();
     }
@@ -40,10 +47,6 @@ function deleteTask(index) {
     renderTasks();
 }
 
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
 export function initializeTaskListeners() {
     addTaskBtn.addEventListener('click', addTask);
     taskList.addEventListener('click', (e) => {
@@ -53,3 +56,5 @@ export function initializeTaskListeners() {
         }
     });
 }
+
+renderTasks();

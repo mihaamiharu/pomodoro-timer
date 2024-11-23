@@ -1,1 +1,1 @@
-{"version":"2.1.5","results":[[":frontend/tests/timer.test.js",{"duration":7.808800000000019,"failed":false}]]}
+{"version":"2.1.5","results":[[":frontend/tests/timer.test.js",{"duration":7.8437999999999874,"failed":false}],[":frontend/tests/user.test.js",{"duration":17.88069999999999,"failed":false}]]}
