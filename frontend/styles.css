@@ -1,11 +1,21 @@
+:root {
+    --background-color: white;
+    --text-color: black;
+    --accent-color: blue;
+    --progress-color: #007bff;
+    --circle-background: #e6e6e6;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: var(--background-color);
+    color: var(--text-color);
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding: 0;
 }
 
 .pomodoro-app {
@@ -38,10 +48,31 @@ body {
     color: white;
 }
 
+.progress-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+    stroke-dasharray: 408; /* Circumference of the circle */
+    stroke-dashoffset: 408; /* Start with no progress */
+    transition: stroke-dashoffset 0.35s;
+    stroke: var(--progress-color);
+}
+
 #timer-display {
-    font-size: 48px;
-    margin: 20px 0;
-    color: #333;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: var(--text-color);
 }
 
 .controls {
@@ -50,30 +81,189 @@ body {
     gap: 10px;
 }
 
-button {
+.controls button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.controls button:active {
+    transform: translateY(0);
+    background-color: #003f7f;
+}
+
+#start-btn {
+    background-color: #28a745;
+}
+
+#start-btn:hover {
+    background-color: #218838;
+}
+
+#start-btn:active {
+    background-color: #1e7e34;
+}
+
+#pause-btn {
+    background-color: #ffc107;
+    color: black;
+}
+
+#pause-btn:hover {
+    background-color: #e0a800;
+}
+
+#pause-btn:active {
+    background-color: #c69500;
+}
+
+#reset-btn {
+    background-color: #dc3545;
+}
+
+#reset-btn:hover {
+    background-color: #c82333;
+}
+
+#reset-btn:active {
+    background-color: #bd2130;
+}
+
+.task-list {
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 500px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-list h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.task-input input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.task-input input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.task-input button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    background-color: var(--accent-color);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background: #ddd;
+.task-input button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
-button:active {
-    background: #ccc;
+.task-input button:active {
+    background-color: #003f7f;
+    transform: translateY(0);
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#task-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#task-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#task-list li.completed {
+    text-decoration: line-through;
+    color: #888;
+    background-color: #f1f1f1;
+}
+
+#task-list li button.delete-task-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#task-list li button.delete-task-btn:hover {
+    background-color: #c82333;
+}
+
+#task-list li button.delete-task-btn:active {
+    background-color: #bd2130;
 }
 
 .settings {
     margin-top: 20px;
     text-align: left;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .settings div {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 label {
@@ -81,71 +271,16 @@ label {
     margin-right: 10px;
 }
 
-input {
-    width: 50px;
-    padding: 5px;
-    font-size: 14px;
+input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    transition: border-color 0.3s ease;
 }
 
-.task-list {
-    margin-top: 20px;
-    text-align: left;
-}
-
-.task-input {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.task-input input {
-    flex: 1;
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.task-input button {
-    padding: 5px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #666;
-    color: white;
-}
-
-.task-input button:hover {
-    background-color: #555;
-}
-
-#task-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-#task-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
-    margin-bottom: 5px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-}
-
-#task-list li.completed {
-    text-decoration: line-through;
-    color: gray;
-}
-
-.task-list button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: red;
-    font-size: 14px;
+input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
 }

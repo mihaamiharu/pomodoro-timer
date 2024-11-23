@@ -25,8 +25,21 @@ const workInput = document.getElementById('work-duration');
 const shortBreakInput = document.getElementById('short-break-duration');
 const longBreakInput = document.getElementById('long-break-duration');
 
+const circle = document.querySelector('.progress-ring-circle');
+const radius = circle.r.baseVal.value;
+const circumference = 2 * Math.PI * radius;
+
+function setCircleProgress(progress) {
+    const offset = (progress / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+}
+
 function renderTimer() {
     updateTimerDisplay(timerDisplay, formatTime(timeLeft));
+    const currentSession = document.querySelector('.tabs .active').id.replace('-tab', '');
+    const totalTime = durations[currentSession];
+    const progress = ((totalTime - timeLeft) / totalTime) * 100;
+    setCircleProgress(progress);
 }
 
 function syncInputsWithDurations() {
@@ -40,6 +53,25 @@ function handleTabSwitch(e) {
     switchSession(newSession, renderTimer);
     document.querySelectorAll('.tabs button').forEach((btn) => btn.classList.remove('active'));
     e.target.classList.add('active');
+    saveSessionData();
+    setCircleProgress(0);
+}
+
+function handleSessionEnd() {
+    const currentSession = document.querySelector('.tabs .active').id.replace('-tab', '');
+
+    let nextSession;
+    if (currentSession === 'work') {
+        nextSession = 'short-break';
+    } else if (currentSession === 'short-break') {
+        nextSession = 'long-break';
+    } else {
+        nextSession = 'work';
+    }
+
+    switchSession(nextSession, renderTimer);
+    document.querySelectorAll('.tabs button').forEach((btn) => btn.classList.remove('active'));
+    document.getElementById(`${nextSession}-tab`).classList.add('active');
     saveSessionData();
 }
 
@@ -56,15 +88,17 @@ function handleCustomDurationChange() {
 workTab.addEventListener('click', handleTabSwitch);
 shortBreakTab.addEventListener('click', handleTabSwitch);
 longBreakTab.addEventListener('click', handleTabSwitch);
-startBtn.addEventListener('click', () => startTimer(renderTimer, renderTimer));
+startBtn.addEventListener('click', () => startTimer(renderTimer, handleSessionEnd));
 pauseBtn.addEventListener('click', pauseTimer);
 resetBtn.addEventListener('click', () => {
     resetTimer(renderTimer);
     saveSessionData();
+    setCircleProgress(0);
 });
 workInput.addEventListener('change', handleCustomDurationChange);
 shortBreakInput.addEventListener('change', handleCustomDurationChange);
 longBreakInput.addEventListener('change', handleCustomDurationChange);
+
 document.addEventListener('DOMContentLoaded', () => {
     if (Notification.permission !== 'granted') {
         Notification.requestPermission().then(permission => {
@@ -75,10 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
 
-restoreDurationsFromStorage(renderTimer);
-restoreSessionData(renderTimer);
-syncInputsWithDurations();
-initializeTaskListeners();
-renderTasks();
+    restoreDurationsFromStorage(renderTimer);
+    restoreSessionData(renderTimer);
+    syncInputsWithDurations();
+    initializeTaskListeners();
+    renderTasks();
+    const progressRing = document.querySelector('.progress-ring');
+    progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+    setCircleProgress(0);
+});
