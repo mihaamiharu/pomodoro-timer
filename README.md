@@ -13,7 +13,7 @@ A productivity tool built with vanilla JavaScript to help users manage their wor
 
 ## Demo
 
-- Access the live demo: [Pomodoro Timer](http://103.174.114.13:3000/frontend/)
+- Access the live demo: [Pomodoro Timer](http://103.174.114.13:3000/)
 ![Pomodoro Timer Demo](./pomodoro-demo.gif)
 
 ## Installation
